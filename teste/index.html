@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../icone-512.png">
+<title>Teste do Cotou</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Como entrar no teste do Cotou, o que experimentar e como mandar sugestões.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: uma coluna de leitura (como um guia), com os passos numerados e a lista de missões marcável. */
+:root {
+  --bg: #FFFFFF;
+  --chao: #F2F6F4;
+  --tinta: #13201B;
+  --suave: #4C5A54;
+  --linha: #DCE5E0;
+  --verde: #0B7A4B;
+  --verdeForte: #075E39;
+  --verdeClaro: #E4F3EB;
+  --moeda: #E8A317;
+  --alerta: #8A4A06;
+  --alertaFundo: #FDF0DB;
+  --sobreVerde: #FFFFFF;
+  --f: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1613; --chao: #141F1B; --tinta: #EAF2EE; --suave: #A9B8B1; --linha: #27342F;
+    --verde: #2FA36F; --verdeForte: #7FD3AA; --verdeClaro: #17302A; --moeda: #F0B43A; --alerta: #F3C27A; --alertaFundo: #2E2412; --sobreVerde: #06130D;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1613; --chao: #141F1B; --tinta: #EAF2EE; --suave: #A9B8B1; --linha: #27342F;
+  --verde: #2FA36F; --verdeForte: #7FD3AA; --verdeClaro: #17302A; --moeda: #F0B43A; --alerta: #F3C27A; --alertaFundo: #2E2412; --sobreVerde: #06130D;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--tinta); font-family: var(--f); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--verdeForte); }
+a:focus-visible, button:focus-visible, label:focus-within { outline: 3px solid var(--moeda); outline-offset: 3px; border-radius: 8px; }
+.miolo { max-width: 760px; margin: 0 auto; padding-inline: 20px; }
+h1, h2, h3 { margin: 0; line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; }
+p { margin: 0; }
+
+.topo { border-bottom: 1px solid var(--linha); }
+.topo .miolo { display: flex; align-items: center; gap: 10px; padding-block: 12px; }
+.marca { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 21px; color: var(--tinta); text-decoration: none; }
+.marca svg { width: 34px; height: 34px; }
+.topo .tag { margin-left: auto; font-size: 13px; font-weight: 700; color: var(--verdeForte); background: var(--verdeClaro); border-radius: 999px; padding: 5px 12px; }
+
+.abertura { padding-block: 40px 28px; display: flex; flex-direction: column; gap: 14px; }
+.abertura h1 { font-size: clamp(32px, 6vw, 46px); font-weight: 800; }
+.abertura p { font-size: 18px; color: var(--suave); max-width: 36em; }
+.prazo { display: flex; align-items: center; gap: 14px; background: var(--verdeClaro); border-radius: 18px; padding: 16px 18px; margin-top: 8px; }
+.prazo b { font-size: 34px; font-weight: 800; color: var(--verdeForte); font-variant-numeric: tabular-nums; line-height: 1; }
+.prazo span { font-size: 15.5px; }
+
+section { padding-block: 28px; border-top: 1px solid var(--linha); }
+section h2 { font-size: 26px; font-weight: 800; }
+section > .miolo > p.intro { margin-top: 8px; color: var(--suave); }
+
+.passos { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 18px; counter-reset: p; }
+.passos > li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; counter-increment: p; }
+.passos > li::before { content: counter(p); width: 40px; height: 40px; border-radius: 50%; background: var(--moeda); color: #3D2800; font-weight: 800; display: grid; place-items: center; }
+.passos h3 { font-size: 19px; font-weight: 800; }
+.passos p { color: var(--suave); margin-top: 4px; }
+.passo-botao { margin-top: 10px; }
+.caixa-link { margin-top: 10px; background: var(--chao); border: 1px dashed var(--linha); border-radius: 14px; padding: 12px 14px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.caixa-link code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; word-break: break-all; flex: 1 1 220px; min-width: 0; }
+.botao { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--verde); color: var(--sobreVerde); font: inherit; font-weight: 700; font-size: 15px; border: 0; border-radius: 12px; padding: 10px 16px; cursor: pointer; text-decoration: none; }
+.botao:hover { background: var(--verdeForte); }
+.aviso { margin-top: 10px; background: var(--alertaFundo); color: var(--tinta); border-radius: 14px; padding: 12px 14px; font-size: 15.5px; }
+.aviso b { color: var(--alerta); }
+#copiado { font-size: 14px; font-weight: 700; color: var(--verdeForte); }
+
+.progresso { margin-top: 16px; display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; color: var(--suave); }
+.barra { flex: 1; height: 10px; border-radius: 5px; background: var(--chao); overflow: hidden; }
+.barra i { display: block; height: 100%; background: var(--verde); border-radius: 5px; transition: width .25s; }
+@media (prefers-reduced-motion: reduce) { .barra i { transition: none; } }
+.missoes { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-direction: column; }
+.missoes li { border-bottom: 1px solid var(--linha); }
+.missoes label { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 14px 2px; cursor: pointer; }
+.missoes input { width: 24px; height: 24px; margin: 2px 0 0; accent-color: var(--verde); }
+.missoes b { display: block; font-weight: 700; }
+.missoes small { display: block; color: var(--suave); font-size: 14.5px; margin-top: 2px; }
+.missoes input:checked + span b { text-decoration: line-through; color: var(--suave); }
+.opcional { font-size: 12px; font-weight: 700; color: var(--verdeForte); background: var(--verdeClaro); border-radius: 999px; padding: 2px 8px; margin-left: 6px; vertical-align: 2px; }
+
+.canais { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+@media (max-width: 640px) { .canais { grid-template-columns: minmax(0, 1fr); } }
+.canal { background: var(--chao); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 4px; }
+.canal b { font-size: 16px; }
+.canal span { color: var(--suave); font-size: 14.5px; }
+
+.perguntas { margin-top: 12px; }
+.perguntas details { border-bottom: 1px solid var(--linha); }
+.perguntas summary { cursor: pointer; list-style: none; padding: 15px 0; font-weight: 700; display: flex; justify-content: space-between; gap: 14px; }
+.perguntas summary::-webkit-details-marker { display: none; }
+.perguntas summary::after { content: "+"; color: var(--verde); font-size: 22px; line-height: 1; }
+.perguntas details[open] summary::after { content: "−"; }
+.perguntas details p { color: var(--suave); padding-bottom: 15px; }
+
+.rodape { border-top: 1px solid var(--linha); padding-block: 26px 40px; font-size: 14.5px; color: var(--suave); }
+.rodape .miolo { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+</style>
+</head>
+<body>
+<header class="topo">
+  <div class="miolo">
+    <a class="marca" href="https://cotou.app/" aria-label="Cotou, página inicial">
+      <svg viewBox="0 0 192 192" aria-hidden="true"><rect width="192" height="192" rx="44" fill="#0B7A4B"></rect><path d="M145 55 A64 64 0 1 0 145 137" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" fill="none"></path><circle cx="96" cy="96" r="38" fill="#E8A317"></circle><text x="96" y="108" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="35" fill="#075E39">R$</text></svg>
+      Cotou
+    </a>
+    <span class="tag">Teste fechado</span>
+  </div>
+</header>
+
+<main>
+  <div class="miolo abertura">
+    <h1>Obrigado por testar o Cotou</h1>
+    <p>Antes de chegar à Play Store, o Google pede que um grupo de pessoas use o app de verdade. Aqui está tudo o que você precisa: como instalar, o que experimentar e como contar o que achou.</p>
+    <div class="prazo"><b>14</b><span>dias seguidos com o app instalado é o que o Google exige. Use no dia a dia, nem que seja só anotando o que acabou.</span></div>
+  </div>
+
+  <section>
+    <div class="miolo">
+      <h2>Como entrar no teste</h2>
+      <ol class="passos">
+        <li>
+          <div>
+            <h3>Entre no grupo de testadores</h3>
+            <p>Pelo celular Android, toque no botão e depois em <b>“Participar do grupo”</b>. Use a <b>mesma conta do Google da sua Play Store</b>.</p>
+            <a class="botao passo-botao" href="https://groups.google.com/g/testadores-do-cotou">Entrar no grupo</a>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Aceite o convite do teste</h3>
+            <p>Toque no botão e depois em <b>“Tornar-se testador”</b>. Se aparecer que você não tem acesso, espere alguns minutos depois de entrar no grupo e tente de novo.</p>
+            <a class="botao passo-botao" href="https://play.google.com/apps/testing/app.cotou">Aceitar o convite</a>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Instale pela Play Store</h3>
+            <p>Toque no botão e em <b>Instalar</b>, como qualquer app. As atualizações chegam sozinhas.</p>
+            <a class="botao passo-botao" href="https://play.google.com/store/apps/details?id=app.cotou">Instalar o Cotou</a>
+            <div class="aviso"><b>Já tem um Cotou instalado por fora?</b> Se você instalou antes por um arquivo (APK), desinstale primeiro. O Android não deixa instalar a versão da loja por cima.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Abra e informe o seu CEP</h3>
+            <p>Depois, o app pergunta se você usa vale-alimentação. Escolher o seu faz o app mostrar primeiro os mercados que aceitam.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Fique com o app por 14 dias</h3>
+            <p>Não desinstale até o fim do teste. Se desinstalar sem querer, instale de novo pelo mesmo link.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="miolo">
+      <h2>O que experimentar</h2>
+      <p class="intro">Não precisa fazer tudo de uma vez. Vá marcando conforme usar: as marcações ficam salvas só neste celular.</p>
+      <div class="progresso"><span id="contagem">0 de 8</span><span class="barra"><i id="barra" style="width:0%"></i></span></div>
+      <ul class="missoes" id="missoes">
+        <li><label><input type="checkbox" id="m1"><span><b>Anote 5 coisas que acabaram em casa</b><small>Do jeito que lembrar: “arroz 5kg”, “detergente”, “tomate”.</small></span></label></li>
+        <li><label><input type="checkbox" id="m2"><span><b>Leia o código de barras de uma embalagem</b><small>No botão ao lado do campo de adicionar. O produto exato entra na lista.</small></span></label></li>
+        <li><label><input type="checkbox" id="m3"><span><b>Puxe a tela para atualizar os preços</b><small>Veja o cartão “Mais barato hoje” e a barra de andamento.</small></span></label></li>
+        <li><label><input type="checkbox" id="m4"><span><b>Compare “Receber em casa” e “Ir à loja”</b><small>E toque em “Ver outros mercados”.</small></span></label></li>
+        <li><label><input type="checkbox" id="m5"><span><b>Abra a sua compra em um mercado</b><small>Pelo botão grande do cartão: itens, frete e total.</small></span></label></li>
+        <li><label><input type="checkbox" id="m6"><span><b>Volte no dia seguinte e veja o histórico</b><small>“Ver histórico” no cartão mostra quanto a lista custava ontem.</small></span></label></li>
+        <li><label><input type="checkbox" id="m7"><span><b>Faça uma compra com o app</b><span class="opcional">se der</span><small>Na loja: “Começar a compra” e marque o que pegar. Ou, se comprou por fora, “Comprou de outro jeito?”.</small></span></label></li>
+        <li><label><input type="checkbox" id="m8"><span><b>Leia o QR code de uma nota fiscal</b><span class="opcional">se der</span><small>Na aba Gastos. O app soma no mês e confere os preços.</small></span></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="miolo">
+      <h2>Achou algo estranho? Conta pra gente</h2>
+      <p class="intro">Erro, tela confusa, preço que não bate ou ideia: tudo ajuda. Se puder, mande um print.</p>
+      <div class="canais">
+        <div class="canal"><b>Pelo app</b><span>Configurações › Enviar sugestão</span></div>
+        <div class="canal"><b>Por e-mail</b><span>contato@cotou.app</span></div>
+        <div class="canal"><b>No Instagram</b><span><a href="https://www.instagram.com/cotou.app/">@cotou.app</a></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="miolo">
+      <h2>Perguntas</h2>
+      <div class="perguntas">
+        <details><summary>Funciona no iPhone?</summary><p>Ainda não. Por enquanto, o Cotou é só para Android.</p></details>
+        <details><summary>Preciso pagar alguma coisa?</summary><p>Não. Nesta fase de lançamento o Cotou é gratuito e não pede cadastro.</p></details>
+        <details><summary>O convite diz que não tenho acesso. E agora?</summary><p>O convite só funciona para quem está no grupo de testadores. Confira se você entrou no grupo (passo 1) com a mesma conta do Google da sua Play Store. Se estiver em outra conta, troque a conta no navegador e entre no grupo de novo. Depois de entrar, pode levar alguns minutos.</p></details>
+        <details><summary>A Play Store diz “Não foi possível baixar”. E agora?</summary><p>Faça nesta ordem e tente de novo: 1) se você já teve um Cotou instalado por arquivo (APK), desinstale; 2) em Configurações › Aplicativos › Google Play Store › Armazenamento, toque em “Limpar cache” e “Limpar dados”; 3) em Configurações › Aplicativos › Google Play services › Armazenamento, toque em “Limpar cache” (para achar esse app, ative “Mostrar aplicativos do sistema”); 4) reinicie o celular. Se ainda não instalar, fale com a gente.</p></details>
+        <details><summary>Desinstalei sem querer. Perdi o teste?</summary><p>Instale de novo pelo botão “Instalar o Cotou” (passo 3). O ideal é ficar com o app os 14 dias seguidos, então reinstale o quanto antes.</p></details>
+        <details><summary>O que acontece com os meus dados?</summary><p>Está tudo explicado na <a href="https://cotou.app/privacidade.html">Política de Privacidade</a>. Nesta versão, o app não pede cadastro.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="miolo">
+    <span>© 2026 Cotou</span>
+    <a href="https://cotou.app/">cotou.app</a>
+    <a href="https://cotou.app/privacidade.html">Privacidade</a>
+    <a href="https://cotou.app/termos.html">Termos de Uso</a>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const CHAVE = "cotou-teste-missoes";
+  const caixas = [...document.querySelectorAll("#missoes input")];
+  const atualizar = () => {
+    const feitas = caixas.filter((c) => c.checked).length;
+    document.getElementById("contagem").textContent = `${feitas} de ${caixas.length}`;
+    document.getElementById("barra").style.width = `${(feitas / caixas.length) * 100}%`;
+  };
+  try {
+    const salvas = JSON.parse(localStorage.getItem(CHAVE) || "[]");
+    caixas.forEach((c) => { c.checked = salvas.includes(c.id); });
+  } catch (e) {}
+  caixas.forEach((c) => c.addEventListener("change", () => {
+    try { localStorage.setItem(CHAVE, JSON.stringify(caixas.filter((x) => x.checked).map((x) => x.id))); } catch (e) {}
+    atualizar();
+  }));
+  atualizar();
+
+})();
+</script>
+</body>
+</html>
