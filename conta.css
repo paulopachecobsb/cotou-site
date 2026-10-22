@@ -1,0 +1,46 @@
+/* Páginas da conta (nova senha, excluir conta, e-mail confirmado): uma coluna estreita, cartão branco sobre o verde do app. */
+:root {
+  --verdeTopo: #12A866; --verde: #0B7A4B; --verdeForte: #075E39; --verdeClaro: #E7F4EC;
+  --moeda: #E8A317; --destaque: #FFE08A; --cartao: #FFFFFF; --tinta: #15181E; --suave: #5F6672; --linha: #DCE5E0;
+  --erro: #B42318; --erroFundo: #FDECEA; --sobreVerde: rgba(255,255,255,.88);
+  --f: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --cartao: #10201A; --tinta: #EAF2EE; --suave: #A9B8B1; --linha: #27342F; --verdeClaro: #17302A; --verdeForte: #7FD3AA; --erroFundo: #3A1715; --erro: #FF9C8F; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --cartao: #10201A; --tinta: #EAF2EE; --suave: #A9B8B1; --linha: #27342F; --verdeClaro: #17302A; --verdeForte: #7FD3AA; --erroFundo: #3A1715; --erro: #FF9C8F; color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body { margin: 0; background: linear-gradient(180deg, var(--verdeTopo), var(--verde) 70%) fixed; background-color: var(--verde); color: var(--tinta); font-family: var(--f); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+.coluna { max-width: 440px; margin: 0 auto; padding-block: 28px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 18px; }
+.marca { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 800; font-size: 22px; text-decoration: none; align-self: flex-start; }
+.marca svg { width: 36px; height: 36px; }
+.cartao { background: var(--cartao); border-radius: 22px; padding: 22px 20px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 14px 34px rgba(3,40,22,.22); }
+h1 { margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -.02em; text-wrap: balance; }
+p { margin: 0; color: var(--suave); }
+p b { color: var(--tinta); }
+label { display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: 14px; }
+input[type="email"], input[type="password"] { height: 50px; border-radius: 14px; border: 2px solid var(--linha); background: transparent; color: var(--tinta); font: 400 16px var(--f); padding: 0 14px; }
+input:focus { outline: none; border-color: var(--verde); }
+.caixa { flex-direction: row; align-items: flex-start; gap: 10px; font-weight: 600; }
+.caixa input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--verde); }
+button, .botao { height: 50px; border-radius: 16px; border: 0; font: 800 16px var(--f); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
+.principal { background: var(--verde); color: #fff; }
+.suave { background: var(--verdeClaro); color: var(--verdeForte); }
+.perigo { background: var(--erro); color: #fff; }
+.google { background: #fff; color: #15181E; border: 2px solid var(--linha); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+:focus-visible { outline: 3px solid var(--moeda); outline-offset: 2px; }
+.regras { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--suave); }
+.regras li::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--linha); margin-right: 8px; vertical-align: 1px; }
+.regras li.ok { color: var(--verdeForte); font-weight: 700; }
+.regras li.ok::before { background: var(--verde); }
+.erro { background: var(--erroFundo); color: var(--erro); border-radius: 12px; padding: 10px 12px; font-weight: 700; font-size: 14px; }
+.ou { display: flex; align-items: center; gap: 12px; color: var(--suave); font-size: 13px; }
+.ou::before, .ou::after { content: ""; flex: 1; height: 1px; background: var(--linha); }
+.icone { width: 64px; height: 64px; border-radius: 50%; background: var(--verdeClaro); color: var(--verdeForte); display: grid; place-items: center; align-self: center; }
+.icone svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.rodape { color: var(--sobreVerde); font-size: 13.5px; text-align: center; }
+.rodape a { color: var(--destaque); font-weight: 700; }
+ul.apaga { margin: 0; padding-left: 20px; color: var(--suave); }
+[hidden] { display: none !important; }

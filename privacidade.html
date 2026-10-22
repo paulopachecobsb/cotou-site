@@ -21,33 +21,49 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
 <body><main>
 <nav><a href="index.html">Cotou</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos de Uso</a></nav>
 <h1>Política de Privacidade</h1>
-<p class="sub">Atualizada em 18/10/2026</p>
+<p class="sub">Atualizada em 22/10/2026</p>
 <h2>Resumo</h2>
-<p>Nesta versão, o app não tem conta, cadastro nem servidor próprio: tudo o que você faz fica guardado só no seu celular.</p>
-<h2>O que fica no seu celular</h2>
-<p>Seu CEP, suas listas e pesquisas, preços consultados, a lista da próxima compra e o histórico de preços dela, o “Sempre compro” (o que você compra e quando), mercados escolhidos, compras marcadas na checklist e as notas fiscais que você ler (itens, valores, nome e CNPJ do mercado).</p>
-<p>Você pode apagar tudo a qualquer momento em Configurações › Apagar todos os dados.</p>
-<h2>Com quem o app se comunica</h2>
+<p>O Cotou tem duas versões. Na <b>versão sem conta</b> (a que está na Play Store hoje), tudo fica só no seu celular. Na <b>versão com conta</b> (o novo Cotou, em teste), você entra com o Google ou com e-mail e senha, e suas listas, compras e notas ficam guardadas na sua conta, para não se perderem ao trocar de celular.</p>
+<p>Nas duas, o Cotou não vende seus dados e não guarda o seu CPF.</p>
+
+<h2>Versão sem conta</h2>
+<p><b>O que fica no seu celular:</b> seu CEP, suas listas e pesquisas, preços consultados, a lista da próxima compra e o histórico de preços dela, o “Sempre compro” (o que você compra e quando), mercados escolhidos, compras marcadas na checklist e as notas fiscais que você ler (itens, valores, nome e CNPJ do mercado). Você pode apagar tudo a qualquer momento em Configurações › Apagar todos os dados.</p>
+<p><b>Sentry:</b> quando o app apresenta um erro, recebe a mensagem técnica do erro, a versão do app e o modelo do celular, para podermos corrigir. Não recebe sua lista, CEP, notas nem dados pessoais.</p>
+<p><b>Sugestões:</b> em Configurações › Enviar sugestão, a mensagem que você escreve vai para o Sentry, junto com o tipo (ideia, problema ou elogio), a versão do app e o modelo do celular, e o seu e-mail se você quiser resposta. No resultado da pesquisa, o link “Algo errado neste resultado?” abre o WhatsApp com o CEP e os itens, e só envia se você tocar em enviar.</p>
+
+<h2>Versão com conta</h2>
+<p><b>Conta:</b> seu nome e e-mail. Entrando com o Google, recebemos do Google o seu nome, e-mail e foto do perfil; não temos acesso à sua senha do Google. Entrando com e-mail, a senha é guardada de forma cifrada pelo serviço de login e ninguém consegue lê-la.</p>
+<p><b>Na sua conta:</b> CEP e endereço (bairro e cidade), vale-alimentação (bandeira, valor e dia do crédito), preferências de avisos, mercados que você ligou ou desligou, suas listas e itens, as compras que você registrar (mercado, itens, preços e se pegou cada item) e as notas fiscais que você ler (loja, CNPJ da loja, data, total, forma de pagamento e os itens com preço). Só você vê esses dados.</p>
+<p><b>Lojas das notas:</b> pelo CNPJ da nota, o app consulta dados públicos da loja (nome fantasia e endereço da unidade). Esses dados são da loja, não seus, e ficam numa lista de lojas compartilhada entre os usuários, sem dizer quem comprou nelas.</p>
+<p><b>Preços compartilhados (anônimos):</b> quando você lê uma nota fiscal, se a opção “Compartilhar os preços das minhas notas” estiver ligada (você é avisado na primeira nota e pode desligar em Perfil › Avisos e privacidade), os preços dos produtos entram numa base anônima, usada para mostrar a todos os usuários quanto custam os produtos em cada loja. Essa base guarda só a loja, o produto, o preço e o dia da compra: não guarda seu nome, e-mail, CPF, o total da nota, a hora nem a forma de pagamento, e não permite saber quem fez a compra.</p>
+<p><b>Onde ficam:</b> no Supabase, serviço de banco de dados e login, em servidores em São Paulo. Cada pessoa só consegue ler e alterar os próprios dados.</p>
+
+<h2>Com quem o app se comunica (as duas versões)</h2>
 <p>Sites dos supermercados: para consultar preços e entrega. Eles recebem o CEP e os produtos pesquisados, como aconteceria se você usasse o site deles.</p>
-<p>ViaCEP e BrasilAPI: para transformar o CEP em endereço e coordenadas.</p>
-<p>Open Food Facts: para sugerir produtos enquanto você digita e identificar produtos pelo código de barras.</p>
+<p>ViaCEP e BrasilAPI: para transformar o CEP em endereço e coordenadas e, na versão com conta, para consultar os dados públicos do CNPJ das lojas.</p>
+<p>Open Food Facts: para identificar produtos pelo código de barras.</p>
 <p>Portais das Secretarias da Fazenda: para abrir a nota fiscal lida pelo QR code.</p>
 <p>Expo (EAS Update): para baixar as atualizações do app.</p>
-<p>Sentry: quando o app apresenta um erro, recebe a mensagem técnica do erro, a versão do app e o modelo do celular, para podermos corrigir. Não recebe sua lista, CEP, notas nem dados pessoais.</p>
+<p>Google: para o login com a conta Google (versão com conta).</p>
+
 <h2>Permissões do celular</h2>
-<p>Localização: usada só quando você toca em “Usar minha localização”, para descobrir o seu CEP.</p>
+<p>Localização: usada só quando você toca em “Localização” ou “Usar minha localização”, para descobrir o seu CEP.</p>
 <p>Câmera: usada só para ler o código de barras de produtos e o QR code da nota fiscal. Nenhuma imagem é guardada.</p>
-<p>Notificações: usadas só se você ligar “Avisar promoções da sua lista”, em Configurações. Com itens na lista, o próprio celular confere os preços dela uma vez por dia, em segundo plano, consultando os sites dos mercados do seu CEP.</p>
+<p>Notificações: na versão sem conta, só se você ligar “Avisar promoções da sua lista”; com itens na lista, o próprio celular confere os preços dela uma vez por dia, em segundo plano. Na versão com conta, para avisar quando a pesquisa de preços terminar com o app em segundo plano. Nas duas, as notificações são geradas no próprio celular.</p>
+
 <h2>Notas fiscais</h2>
-<p>A página da nota pode mostrar seu CPF. O app lê apenas os itens, valores, data, forma de pagamento (por exemplo, vale-alimentação), nome e CNPJ do mercado — o CPF não é guardado.</p>
-<h2>Sugestões</h2>
-<p>Em Configurações › Enviar sugestão, a mensagem que você escreve vai para o Sentry (o mesmo serviço do registro de erros), junto com o tipo (ideia, problema ou elogio), a versão do app e o modelo do celular, e o seu e-mail se você quiser resposta. Sua lista e seu CEP não vão. No resultado da pesquisa, o link “Algo errado neste resultado?” abre o WhatsApp com o CEP e os itens, e só envia se você tocar em enviar.</p>
+<p>A página da nota pode mostrar seu CPF. O app lê apenas os itens, valores, data, forma de pagamento (por exemplo, vale-alimentação), nome e CNPJ do mercado. O CPF não é lido nem guardado.</p>
+
+<h2>Por quanto tempo</h2>
+<p>Versão sem conta: até você apagar os dados ou desinstalar o app. Versão com conta: enquanto a conta existir. Ao excluir a conta, tudo o que é seu é apagado; os preços anônimos compartilhados continuam, porque não têm o seu nome nem como ser ligados a você.</p>
+
 <h2>Seus direitos (LGPD)</h2>
-<p>Nesta versão, como os dados ficam só no seu celular, você tem controle total: pode consultá-los no próprio app e apagá-los em Configurações.</p>
-<p>Contato para dúvidas ou pedidos sobre os seus dados: <a href="mailto:contato@cotou.app">contato@cotou.app</a> (ou, no app, Configurações › Enviar sugestão).</p>
+<p>Você pode confirmar quais dados temos, consultar, corrigir, levar e apagar os seus dados, e desligar o compartilhamento anônimo de preços a qualquer momento.</p>
+<p>Na versão com conta: <b>Perfil › Baixar meus dados</b> gera uma cópia de tudo; <b>Perfil › Dados pessoais</b> corrige o nome; <b>Perfil › Excluir minha conta</b> apaga a conta e todos os dados. Também dá para excluir a conta pela web, em <a href="excluir-conta/">cotou.app/excluir-conta</a>.</p>
+<p>Contato para dúvidas ou pedidos sobre os seus dados: <a href="mailto:contato@cotou.app">contato@cotou.app</a>. Respondemos em até 15 dias.</p>
+
 <h2>Mudanças nesta política</h2>
-<p>Esta política descreve como o app funciona na versão atual e pode mudar com novas versões, por exemplo se o app passar a oferecer conta ou a guardar dados fora do celular.</p>
-<p>Antes de uma mudança desse tipo valer, você será avisado no app. O que depender do seu consentimento só vai acontecer se você aceitar.</p>
+<p>Esta política descreve como o app funciona nas versões atuais e pode mudar com novas versões. Antes de uma mudança importante valer, você será avisado no app. O que depender do seu consentimento só vai acontecer se você aceitar.</p>
 <footer>Contato: <a href="mailto:contato@cotou.app">contato@cotou.app</a></footer>
 </main></body>
 </html>

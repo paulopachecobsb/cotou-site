@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../favicon.png" type="image/png">
+<title>E-mail confirmado · Cotou</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../conta.css">
+</head>
+<body>
+<div class="coluna">
+  <a class="marca" href="https://cotou.app/" aria-label="Cotou, página inicial"><svg viewBox="0 0 192 192" aria-hidden="true"><rect width="192" height="192" rx="44" fill="#FFFFFF"></rect><path d="M145 55 A64 64 0 1 0 145 137" stroke="#0B7A4B" stroke-width="18" stroke-linecap="round" fill="none"></path><circle cx="96" cy="96" r="38" fill="#E8A317"></circle><text x="96" y="108" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="35" fill="#075E39">R$</text></svg>Cotou</a>
+
+  <section class="cartao" id="ok">
+    <span class="icone"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+    <h1>E-mail confirmado</h1>
+    <p>Sua conta do Cotou está pronta. Volte ao app e toque em <b>Já tem conta? Entrar</b> com o seu e-mail e senha.</p>
+  </section>
+  <section class="cartao" id="vencido" hidden>
+    <h1>Este link não vale mais</h1>
+    <p>O link de confirmação vale por 1 hora e só pode ser usado uma vez. Se a conta já foi confirmada, é só entrar no app. Se não, crie a conta de novo com o mesmo e-mail para receber outro link.</p>
+  </section>
+  <p class="rodape">Dúvidas: <a href="mailto:contato@cotou.app">contato@cotou.app</a> · <a href="../privacidade.html">Privacidade</a></p>
+</div>
+<script>
+  // O Supabase volta para cá com "#error=..." quando o link venceu ou já foi usado.
+  if (/error/.test(location.hash + location.search)) {
+    document.getElementById("ok").hidden = true;
+    document.getElementById("vencido").hidden = false;
+  }
+  // Tira o acesso do endereço (não precisa ficar no histórico).
+  if (location.hash) history.replaceState(null, "", location.pathname);
+</script>
+</body>
+</html>

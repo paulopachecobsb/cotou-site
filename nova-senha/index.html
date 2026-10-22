@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../favicon.png" type="image/png">
+<title>Nova senha · Cotou</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../conta.css">
+</head>
+<body>
+<div class="coluna">
+  <a class="marca" href="https://cotou.app/" aria-label="Cotou, página inicial"><svg viewBox="0 0 192 192" aria-hidden="true"><rect width="192" height="192" rx="44" fill="#FFFFFF"></rect><path d="M145 55 A64 64 0 1 0 145 137" stroke="#0B7A4B" stroke-width="18" stroke-linecap="round" fill="none"></path><circle cx="96" cy="96" r="38" fill="#E8A317"></circle><text x="96" y="108" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="35" fill="#075E39">R$</text></svg>Cotou</a>
+
+  <section class="cartao" id="esperando" data-passo>
+    <h1>Abrindo o link…</h1>
+    <p>Um instante.</p>
+  </section>
+
+  <form class="cartao" id="formulario" data-passo hidden>
+    <h1>Crie uma senha nova</h1>
+    <p>Para a conta <b id="email"></b>.</p>
+    <label>Senha nova<input type="password" id="senha" autocomplete="new-password" required></label>
+    <ul class="regras" aria-live="polite">
+      <li id="r-tamanho">8 caracteres</li>
+      <li id="r-numero">um número</li>
+      <li id="r-letra">uma letra</li>
+    </ul>
+    <label>Repita a senha<input type="password" id="repete" autocomplete="new-password" required></label>
+    <div class="erro" id="erro" role="alert" hidden></div>
+    <button class="principal" id="salvar" type="submit" disabled>Salvar a senha nova</button>
+  </form>
+
+  <section class="cartao" id="pronto" data-passo hidden>
+    <span class="icone"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+    <h1>Senha trocada</h1>
+    <p>Volte ao app Cotou e entre com o seu e-mail e a senha nova.</p>
+  </section>
+
+  <section class="cartao" id="expirou" data-passo hidden>
+    <h1>Este link não vale mais</h1>
+    <p>O link para criar uma senha nova vale por 1 hora e só pode ser usado uma vez. No app, toque em <b>Entrar › Esqueci minha senha</b> para receber outro.</p>
+  </section>
+  <p class="rodape">Dúvidas: <a href="mailto:contato@cotou.app">contato@cotou.app</a> · <a href="../privacidade.html">Privacidade</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+// Projeto do Cotou no Supabase (São Paulo). A URL e a chave publicável são públicas; os dados são protegidos pelo RLS.
+const banco = window.supabase.createClient("https://utpaefvjcpbepuxidbsk.supabase.co", "sb_publishable_3Binn7DPbUmr8y6kJFuzPg_-4f6_Gab");
+const $ = (id) => document.getElementById(id);
+const mostrar = (id) => document.querySelectorAll("[data-passo]").forEach((el) => (el.hidden = el.id !== id));
+
+const regras = () => {
+  const s = $("senha").value;
+  const r = { tamanho: s.length >= 8, numero: /\d/.test(s), letra: /[a-zà-ú]/i.test(s) };
+  for (const [k, ok] of Object.entries(r)) $("r-" + k).classList.toggle("ok", ok);
+  $("salvar").disabled = !(r.tamanho && r.numero && r.letra && $("repete").value);
+};
+$("senha").addEventListener("input", regras);
+$("repete").addEventListener("input", regras);
+
+let aberto = false;
+banco.auth.onAuthStateChange((evento, sessao) => {
+  if (sessao && !aberto) {
+    aberto = true;
+    $("email").textContent = sessao.user.email || "";
+    mostrar("formulario");
+  }
+});
+// O link chega com o acesso no endereço; sem ele (ou vencido), avisa.
+setTimeout(() => !aberto && mostrar("expirou"), location.hash.includes("error") ? 0 : 4000);
+
+$("formulario").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  $("erro").hidden = true;
+  if ($("senha").value !== $("repete").value) {
+    $("erro").textContent = "As duas senhas não são iguais.";
+    $("erro").hidden = false;
+    return;
+  }
+  $("salvar").disabled = true;
+  $("salvar").textContent = "Salvando…";
+  const { error } = await banco.auth.updateUser({ password: $("senha").value });
+  if (error) {
+    const m = error.message.toLowerCase();
+    $("erro").textContent = m.includes("different") || m.includes("same")
+      ? "A senha nova precisa ser diferente da anterior."
+      : m.includes("weak") || m.includes("password")
+        ? "A senha não foi aceita. Use pelo menos 8 caracteres, com letra e número."
+        : "Não deu certo agora. Confira a internet e tente de novo.";
+    $("erro").hidden = false;
+    $("salvar").textContent = "Salvar a senha nova";
+    regras();
+    return;
+  }
+  await banco.auth.signOut();
+  mostrar("pronto");
+});
+</script>
+</body>
+</html>
