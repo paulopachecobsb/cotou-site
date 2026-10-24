@@ -22,6 +22,7 @@
     <div class="ou">ou</div>
     <label>E-mail<input type="email" id="email" autocomplete="email" required></label>
     <label>Senha<input type="password" id="senha" autocomplete="current-password" required></label>
+    <div id="turnstile" style="display:flex;justify-content:center"></div>
     <div class="erro" id="erroEntrar" role="alert" hidden></div>
     <button class="suave" type="submit" id="botaoEntrar">Entrar com e-mail</button>
   </form>
@@ -53,6 +54,7 @@
   </section>
   <p class="rodape">Dúvidas: <a href="mailto:contato@cotou.app">contato@cotou.app</a> · <a href="../privacidade.html">Privacidade</a></p>
 </div>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 // Projeto do Cotou no Supabase (São Paulo). A URL e a chave publicável são públicas; os dados são protegidos pelo RLS.
@@ -72,11 +74,38 @@ banco.auth.onAuthStateChange((evento, sessao) => {
 $("google").addEventListener("click", () =>
   banco.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname } }),
 );
+// Verificação contra robôs (Cloudflare Turnstile) antes de entrar com e-mail e senha. Quase sempre invisível;
+// só aparece um quadrinho quando o Cloudflare desconfia. Chave vazia = verificação desligada.
+const TURNSTILE = "0x4AAAAAAFkdIDSk-jzn3Euw";
+let widgetTurnstile = null, esperaTurnstile = null;
+function tokenTurnstile() {
+  if (!TURNSTILE) return Promise.resolve(undefined);
+  return new Promise((ok, falhou) => {
+    const t = setTimeout(() => (esperaTurnstile = null, falhou(new Error("verificação"))), 60000);
+    esperaTurnstile = { ok: (v) => (clearTimeout(t), esperaTurnstile = null, ok(v)), falhou: () => (clearTimeout(t), esperaTurnstile = null, falhou(new Error("verificação"))) };
+    if (!window.turnstile) return esperaTurnstile.falhou();
+    if (widgetTurnstile === null)
+      widgetTurnstile = turnstile.render("#turnstile", { sitekey: TURNSTILE, language: "pt-br", appearance: "interaction-only", execution: "execute",
+        callback: (v) => esperaTurnstile?.ok(v), "error-callback": () => (esperaTurnstile?.falhou(), true), "expired-callback": () => esperaTurnstile?.falhou() });
+    else turnstile.reset(widgetTurnstile);
+    turnstile.execute(widgetTurnstile);
+  });
+}
+
 $("entrar").addEventListener("submit", async (e) => {
   e.preventDefault();
   $("erroEntrar").hidden = true;
   $("botaoEntrar").disabled = true;
-  const { error } = await banco.auth.signInWithPassword({ email: $("email").value.trim(), password: $("senha").value });
+  let captchaToken;
+  try {
+    captchaToken = await tokenTurnstile();
+  } catch {
+    $("botaoEntrar").disabled = false;
+    $("erroEntrar").textContent = "Não deu para confirmar que você é uma pessoa. Recarregue a página e tente de novo.";
+    $("erroEntrar").hidden = false;
+    return;
+  }
+  const { error } = await banco.auth.signInWithPassword({ email: $("email").value.trim(), password: $("senha").value, options: { captchaToken } });
   $("botaoEntrar").disabled = false;
   if (error) {
     $("erroEntrar").textContent = /invalid/i.test(error.message)
