@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Verificação do Cotou</title>
+<!-- Página aberta dentro do app (WebView) para a verificação contra robôs (Cloudflare Turnstile).
+     Fica num endereço de verdade do cotou.app porque o Turnstile não carrega direito em página montada dentro do app.
+     Devolve o código ao app por window.ReactNativeWebView.postMessage. A chave é pública. -->
+<style>html,body{margin:0;min-height:100%;background:#fff;display:flex;align-items:center;justify-content:center;font:14px system-ui,sans-serif;color:#5F6672}</style>
+<script>
+var CHAVE = "0x4AAAAAAFkdIDSk-jzn3Euw";
+function manda(m) { try { window.ReactNativeWebView.postMessage(JSON.stringify(m)); } catch (e) {} }
+function pronto() {
+  try {
+    turnstile.render("#w", {
+      sitekey: CHAVE, language: "pt-br", theme: "light", appearance: "interaction-only",
+      callback: function (t) { manda({ tipo: "token", token: t }); },
+      "error-callback": function (c) { manda({ tipo: "erro", codigo: String(c) }); return true; },
+      "expired-callback": function () { manda({ tipo: "erro", codigo: "expirou" }); },
+      "unsupported-callback": function () { manda({ tipo: "erro", codigo: "sem-suporte" }); },
+      "before-interactive-callback": function () { manda({ tipo: "mostrar" }); },
+      "after-interactive-callback": function () { manda({ tipo: "esconder" }); }
+    });
+  } catch (e) { manda({ tipo: "erro", codigo: "render" }); }
+}
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=pronto&render=explicit" async defer onerror="manda({tipo:'erro',codigo:'script'})"></script>
+</head>
+<body><div id="w"></div></body>
+</html>
