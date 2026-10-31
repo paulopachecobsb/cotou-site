@@ -141,6 +141,13 @@ p { margin: 0; }
 @media (max-width: 860px) { .testar { grid-template-columns: minmax(0, 1fr); } }
 .testar ol { margin: 20px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; color: var(--suave); }
 .testar ol b { color: var(--tinta); }
+.testar ol.passos-teste, .passos-teste { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; counter-reset: passo; }
+.passos-teste li { background: var(--bg); border: 1px solid var(--linha); border-radius: 18px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+.passos-teste li b { color: var(--tinta); font-size: 17px; }
+.passos-teste li span { color: var(--suave); font-size: 15px; }
+.passos-teste li .botao { align-self: flex-start; margin-top: 4px; }
+.det-teste { margin-top: 14px; color: var(--suave); font-size: 15px; }
+.det-teste a { color: var(--verdeForte); font-weight: 700; }
 .caixa-email { background: var(--bg); border: 1px solid var(--linha); border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 12px; }
 .caixa-email .email { font-size: 22px; font-weight: 800; color: var(--verdeForte); word-break: break-all; user-select: all; }
 .caixa-email .det { color: var(--suave); font-size: 14.5px; }
@@ -265,20 +272,20 @@ section[id] { scroll-margin-top: 80px; }
     <div class="miolo testar">
       <div>
         <h2>Quero testar</h2>
-        <p class="intro">O Cotou está em teste antes de chegar ao Google Play. Para participar:</p>
-        <ol>
-          <li>Mande um e-mail para <b>contato@cotou.app</b> com o seu <b>e-mail do Google</b> (o mesmo da Play Store do seu Android).</li>
-          <li>Você recebe o convite do teste e instala pelo Google Play, como qualquer app.</li>
-          <li>Use no dia a dia e conte o que achou pelo próprio app, em Perfil › Enviar sugestão.</li>
+        <p class="intro">Leva uns 2 minutos, pelo celular Android, com a mesma conta do Google da sua Play Store:</p>
+        <ol class="passos-teste">
+          <li><b>Entre no grupo de testadores</b><span>Toque em “Participar do grupo”.</span><a class="botao" href="https://groups.google.com/g/testadores-do-cotou">1. Entrar no grupo</a></li>
+          <li><b>Aceite o convite do teste</b><span>Toque em “Tornar-se testador”. Se disser que você não tem acesso, espere alguns minutos e tente de novo.</span><a class="botao" href="https://play.google.com/apps/testing/app.cotou">2. Aceitar o convite</a></li>
+          <li><b>Instale pela Play Store</b><span>Como qualquer app. As atualizações chegam sozinhas.</span><a class="botao" href="https://play.google.com/store/apps/details?id=app.cotou">3. Instalar o Cotou</a></li>
         </ol>
+        <p class="det-teste">Mais detalhes e dúvidas comuns em <a href="https://cotou.app/teste/">cotou.app/teste</a>. Sem pagar nada para testar nesta versão.</p>
       </div>
       <div class="caixa-email">
-        <span class="det">Mande seu e-mail do Google para</span>
-        <span class="email" id="emailTeste">contato@cotou.app</span>
-        <button class="botao" type="button" id="copiar">Copiar o endereço</button>
-        <span id="copiado" role="status"></span>
-        <span class="det">Pode demorar alguns dias para o convite chegar.</span>
-        <a class="insta" href="https://www.instagram.com/cotou.app/"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Ou fale com a gente no Instagram: @cotou.app</a>
+        <span class="email">Dicas</span>
+        <span class="det"><b>Use a mesma conta do Google</b> da Play Store do celular nos 3 passos. Com outra conta, o convite não aparece.</span>
+        <span class="det"><b>“Você não tem acesso”?</b> O grupo leva alguns minutos para liberar. Espere um pouco e toque no passo 2 de novo.</span>
+        <span class="det"><b>Depois de instalar</b>, abra o Cotou, crie sua conta e monte a primeira lista.</span>
+        <a class="botao leve" href="https://cotou.app/teste/">Ver o guia do testador</a>
       </div>
     </div>
   </section>
@@ -296,25 +303,6 @@ section[id] { scroll-margin-top: 80px; }
   </div>
 </footer>
 
-<script>
-document.getElementById("copiar").addEventListener("click", () => {
-  const aviso = document.getElementById("copiado");
-  const email = document.getElementById("emailTeste");
-  const selecionar = () => {
-    const r = document.createRange();
-    r.selectNodeContents(email);
-    const s = window.getSelection();
-    s.removeAllRanges();
-    s.addRange(r);
-    aviso.textContent = "Endereço selecionado. Copie com o menu do celular.";
-  };
-  try {
-    navigator.clipboard.writeText("contato@cotou.app").then(() => { aviso.textContent = "Endereço copiado."; }, selecionar);
-  } catch (e) {
-    selecionar();
-  }
-});
-</script>
 <!-- Cloudflare Web Analytics: conta visitas sem cookies e sem identificar ninguém --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d9c60cd35526443e93c724b9c30d157c"}'></script>
 </body>
 </html>
