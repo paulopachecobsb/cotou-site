@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com; connect-src https://utpaefvjcpbepuxidbsk.supabase.co wss://utpaefvjcpbepuxidbsk.supabase.co https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'self'; object-src 'none'">
 <link rel="icon" href="../favicon.png" type="image/png">
 <title>Nova senha · Cotou</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,7 +47,7 @@
   </section>
   <p class="rodape">Dúvidas: <a href="mailto:contato@cotou.app">contato@cotou.app</a> · <a href="../privacidade.html">Privacidade</a></p>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="../vendor/supabase-js-2.118.0.js"></script>
 <script>
 // Projeto do Cotou no Supabase (São Paulo). A URL e a chave publicável são públicas; os dados são protegidos pelo RLS.
 const banco = window.supabase.createClient("https://utpaefvjcpbepuxidbsk.supabase.co", "sb_publishable_3Binn7DPbUmr8y6kJFuzPg_-4f6_Gab");
