@@ -140,27 +140,6 @@ section > .miolo > p.intro { margin-top: 8px; color: var(--suave); }
   </div>
 </footer>
 
-<script>
-(() => {
-  const CHAVE = "cotou-teste-missoes";
-  const caixas = [...document.querySelectorAll("#missoes input")];
-  const atualizar = () => {
-    const feitas = caixas.filter((c) => c.checked).length;
-    document.getElementById("contagem").textContent = `${feitas} de ${caixas.length}`;
-    document.getElementById("barra").style.width = `${(feitas / caixas.length) * 100}%`;
-  };
-  try {
-    const salvas = JSON.parse(localStorage.getItem(CHAVE) || "[]");
-    caixas.forEach((c) => { c.checked = salvas.includes(c.id); });
-  } catch (e) {}
-  caixas.forEach((c) => c.addEventListener("change", () => {
-    try { localStorage.setItem(CHAVE, JSON.stringify(caixas.filter((x) => x.checked).map((x) => x.id))); } catch (e) {}
-    atualizar();
-  }));
-  atualizar();
-
-})();
-</script>
 <!-- Cloudflare Web Analytics: conta visitas sem cookies e sem identificar ninguém --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d9c60cd35526443e93c724b9c30d157c"}'></script>
 </body>
 </html>

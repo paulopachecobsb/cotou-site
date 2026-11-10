@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../icone-512.png">
+<title>Convite do Cotou</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Convite para fazer a lista de compras da casa junto no Cotou.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: uma coluna de leitura (como um guia), com os passos numerados e a lista de missões marcável. */
+:root {
+  --bg: #FFFFFF;
+  --chao: #F2F6F4;
+  --tinta: #13201B;
+  --suave: #4C5A54;
+  --linha: #DCE5E0;
+  --verde: #0B7A4B;
+  --verdeForte: #075E39;
+  --verdeClaro: #E4F3EB;
+  --moeda: #E8A317;
+  --alerta: #8A4A06;
+  --alertaFundo: #FDF0DB;
+  --sobreVerde: #FFFFFF;
+  --f: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1613; --chao: #141F1B; --tinta: #EAF2EE; --suave: #A9B8B1; --linha: #27342F;
+    --verde: #2FA36F; --verdeForte: #7FD3AA; --verdeClaro: #17302A; --moeda: #F0B43A; --alerta: #F3C27A; --alertaFundo: #2E2412; --sobreVerde: #06130D;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1613; --chao: #141F1B; --tinta: #EAF2EE; --suave: #A9B8B1; --linha: #27342F;
+  --verde: #2FA36F; --verdeForte: #7FD3AA; --verdeClaro: #17302A; --moeda: #F0B43A; --alerta: #F3C27A; --alertaFundo: #2E2412; --sobreVerde: #06130D;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--tinta); font-family: var(--f); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--verdeForte); }
+a:focus-visible, button:focus-visible, label:focus-within { outline: 3px solid var(--moeda); outline-offset: 3px; border-radius: 8px; }
+.miolo { max-width: 760px; margin: 0 auto; padding-inline: 20px; }
+h1, h2, h3 { margin: 0; line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; }
+p { margin: 0; }
+
+.topo { border-bottom: 1px solid var(--linha); }
+.topo .miolo { display: flex; align-items: center; gap: 10px; padding-block: 12px; }
+.marca { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 21px; color: var(--tinta); text-decoration: none; }
+.marca svg { width: 34px; height: 34px; }
+.topo .tag { margin-left: auto; font-size: 13px; font-weight: 700; color: var(--verdeForte); background: var(--verdeClaro); border-radius: 999px; padding: 5px 12px; }
+
+.abertura { padding-block: 40px 28px; display: flex; flex-direction: column; gap: 14px; }
+.abertura h1 { font-size: clamp(32px, 6vw, 46px); font-weight: 800; }
+.abertura p { font-size: 18px; color: var(--suave); max-width: 36em; }
+.prazo { display: flex; align-items: center; gap: 14px; background: var(--verdeClaro); border-radius: 18px; padding: 16px 18px; margin-top: 8px; }
+.prazo b { font-size: 34px; font-weight: 800; color: var(--verdeForte); font-variant-numeric: tabular-nums; line-height: 1; }
+.prazo span { font-size: 15.5px; }
+
+section { padding-block: 28px; border-top: 1px solid var(--linha); }
+section h2 { font-size: 26px; font-weight: 800; }
+section > .miolo > p.intro { margin-top: 8px; color: var(--suave); }
+
+.passos { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 18px; counter-reset: p; }
+.passos > li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; counter-increment: p; }
+.passos > li::before { content: counter(p); width: 40px; height: 40px; border-radius: 50%; background: var(--moeda); color: #3D2800; font-weight: 800; display: grid; place-items: center; }
+.passos h3 { font-size: 19px; font-weight: 800; }
+.passos p { color: var(--suave); margin-top: 4px; }
+.passo-botao { margin-top: 10px; }
+.caixa-link { margin-top: 10px; background: var(--chao); border: 1px dashed var(--linha); border-radius: 14px; padding: 12px 14px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.caixa-link code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; word-break: break-all; flex: 1 1 220px; min-width: 0; }
+.botao { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--verde); color: var(--sobreVerde); font: inherit; font-weight: 700; font-size: 15px; border: 0; border-radius: 12px; padding: 10px 16px; cursor: pointer; text-decoration: none; }
+.botao:hover { background: var(--verdeForte); }
+.aviso { margin-top: 10px; background: var(--alertaFundo); color: var(--tinta); border-radius: 14px; padding: 12px 14px; font-size: 15.5px; }
+.aviso b { color: var(--alerta); }
+#copiado { font-size: 14px; font-weight: 700; color: var(--verdeForte); }
+
+.progresso { margin-top: 16px; display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; color: var(--suave); }
+.barra { flex: 1; height: 10px; border-radius: 5px; background: var(--chao); overflow: hidden; }
+.barra i { display: block; height: 100%; background: var(--verde); border-radius: 5px; transition: width .25s; }
+@media (prefers-reduced-motion: reduce) { .barra i { transition: none; } }
+.missoes { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-direction: column; }
+.missoes li { border-bottom: 1px solid var(--linha); }
+.missoes label { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 14px 2px; cursor: pointer; }
+.missoes input { width: 24px; height: 24px; margin: 2px 0 0; accent-color: var(--verde); }
+.missoes b { display: block; font-weight: 700; }
+.missoes small { display: block; color: var(--suave); font-size: 14.5px; margin-top: 2px; }
+.missoes input:checked + span b { text-decoration: line-through; color: var(--suave); }
+.opcional { font-size: 12px; font-weight: 700; color: var(--verdeForte); background: var(--verdeClaro); border-radius: 999px; padding: 2px 8px; margin-left: 6px; vertical-align: 2px; }
+
+.canais { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+@media (max-width: 640px) { .canais { grid-template-columns: minmax(0, 1fr); } }
+.canal { background: var(--chao); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 4px; }
+.canal b { font-size: 16px; }
+.canal span { color: var(--suave); font-size: 14.5px; }
+
+.perguntas { margin-top: 12px; }
+.perguntas details { border-bottom: 1px solid var(--linha); }
+.perguntas summary { cursor: pointer; list-style: none; padding: 15px 0; font-weight: 700; display: flex; justify-content: space-between; gap: 14px; }
+.perguntas summary::-webkit-details-marker { display: none; }
+.perguntas summary::after { content: "+"; color: var(--verde); font-size: 22px; line-height: 1; }
+.perguntas details[open] summary::after { content: "−"; }
+.perguntas details p { color: var(--suave); padding-bottom: 15px; }
+
+.rodape { border-top: 1px solid var(--linha); padding-block: 26px 40px; font-size: 14.5px; color: var(--suave); }
+.rodape .miolo { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+</style>
+</head>
+<body>
+<header class="topo">
+  <div class="miolo">
+    <a class="marca" href="https://cotou.app/" aria-label="Cotou, página inicial">
+      <svg viewBox="0 0 192 192" aria-hidden="true"><rect width="192" height="192" rx="44" fill="#0B7A4B"></rect><path d="M145 55 A64 64 0 1 0 145 137" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" fill="none"></path><circle cx="96" cy="96" r="38" fill="#E8A317"></circle><text x="96" y="108" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="35" fill="#075E39">R$</text></svg>
+      Cotou
+    </a>
+    <span class="tag">Lista da casa</span>
+  </div>
+</header>
+
+<main>
+  <div class="miolo abertura">
+    <h1>Você foi chamado para a lista de compras da casa</h1>
+    <p>No Cotou, vocês anotam juntos o que acabou, na mesma lista e ao vivo, e veem em qual mercado da região a compra sai mais barata.</p>
+    <div class="prazo"><b id="codigo">······</b><span>Seu código de convite. Vale 48 horas e serve uma vez.</span></div>
+    <p><a class="botao" href="https://play.google.com/store/apps/details?id=app.cotou">Baixar na Play Store</a></p>
+    <p><a class="botao" id="abrir" href="cotou://convite">Já tenho o Cotou: abrir</a></p>
+    <p>Depois de instalar e criar a conta, o app pergunta “Recebeu um convite?”: digite o código acima. Por enquanto, só para Android.</p>
+  </div>
+</main>
+<script>
+  // O código vem no endereço (cotou.app/casa/?c=K7P4QX).
+  (function () {
+    var c = (new URLSearchParams(location.search).get("c") || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
+    if (c.length !== 6) { document.getElementById("codigo").textContent = "—"; return; }
+    document.getElementById("codigo").textContent = c;
+    document.getElementById("abrir").href = "cotou://casa/" + c;
+  })();
+</script>
+
+<footer class="rodape">
+  <div class="miolo">
+    <span>© 2026 Cotou</span>
+    <a href="https://cotou.app/">cotou.app</a>
+    <a href="https://cotou.app/privacidade.html">Privacidade</a>
+    <a href="https://cotou.app/termos.html">Termos de Uso</a>
+  </div>
+</footer>
+
+<!-- Cloudflare Web Analytics: conta visitas sem cookies e sem identificar ninguém --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d9c60cd35526443e93c724b9c30d157c"}'></script>
+</body>
+</html>
